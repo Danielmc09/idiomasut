@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% block location %}
+    {{ location }}
+{% endblock location %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Card-->
+            <div class="card card-custom gutter-b example example-compact">
+                <div class="card-header">
+                    <h3 class="card-title">{{ title }}</h3>
+                </div>
+                <!--begin::Form-->
+                {% if obj %}
+                    <form class="form" method="POST" action="{% url 'centroidiomas:salon_update' obj.pk %}">
+                {% else %}
+                    <form class="form" method="POST" action="{% url 'centroidiomas:salon_create' %}">
+                {% endif %}
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label>{{ form.salo_nombre.label }}</label>
+                            <div>{{ form.salo_nombre }}</div>
+                            {% for error in form.salo_nombre.errors %}
+                                {% include "base/error_message.html" %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-lg-6">
+                            <label>{{ form.salo_bloque.label }}</label>
+                            <div>{{ form.salo_bloque }}</div>
+                            {% for error in form.salo_bloque.errors %}
+                                {% include "base/error_message.html" %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-lg-7 text-lg-right">
+                            {% if obj %}
+                                {% include "buttons/button_update_form.html" %}
+                            {% else %}
+                                {% include "buttons/button_create_form.html" %}
+                            {% endif %}
+                            <a type="reset" href="{% url 'centroidiomas:salon_view' %}" class="btn btn-light-danger">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Card-->
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base/data_table.html' %}
+{% block btn_create %}
+    <a href="{% url 'centroidiomas:periodoacademico_create' %}" class="btn btn-primary font-weight-bolder">
+        {% include "buttons/button_create.html" %}
+        Nuevo registro
+    </a>
+{% endblock btn_create %}
+{% block title_table %}
+    <tr>
+        <th> ID</th>
+        <th> Fecha inicio</th>
+        <th> Fecha final</th>
+        <th> Año</th>
+        <th> Descripción</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.peac_id }}</th>
+                <th> {{ object.peac_fechainicio }}</th>
+                <th> {{ object.peac_fechafin }}</th>
+                <th> {{ object.peac_ano }}</th>
+                <th> {{ object.peac_descripcion }}</th>
+                <td style="width: 125px">
+                    <a href="{% url 'centroidiomas:periodoacademico_update' object.pk %}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar detalles">
+                        {% include "buttons/button_edit.html" %}
+                    </a>
+                    <a href="{% url 'centroidiomas:periodoacademico_delete' object.pk %}" class="btn btn-sm btn-clean btn-icon" title="Eliminar">
+                        {% include "buttons/button_delete.html" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}

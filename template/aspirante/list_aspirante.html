@@ -1,0 +1,62 @@
+{% extends 'base/data_table.html' %}
+{% block btn_create %}
+    <a href="{% url 'centroidiomas:aspirante_create' %}" class="btn btn-primary font-weight-bolder">
+        {% include "buttons/button_create.html" %}
+        Nuevo registro
+    </a>
+{% endblock btn_create %}
+{% block title_table %}
+    <tr>
+        <th> ID</th>
+        <th> Primer Nombre</th>
+        <th> Segundo Nombre</th>
+        <th> Primer apellido</th>
+        <th> Segundo apellido</th>
+        <th> Correo electronico</th>
+        <th> Genero</th>
+        <th> Tipo de documento</th>
+        <th> Número de documento</th>
+        <th> Rh+</th>
+        <th>Número de celular</th>
+        <th> Telefono casa</th>
+        <th> Estado</th>
+        <th> Ciudad nacimiento</th>
+        <th> Ciudad expedición documento</th>
+        <th> Ciudad residencia</th>
+        <th> Dirección vivienda</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.aspi_id }}</th>
+                <th> {{ object.aspi_primernombre }}</th>
+                <th> {{ object.aspi_segundonombre }}</th>
+                <th> {{ object.aspi_primerapellido }}</th>
+                <th> {{ object.aspi_segundoapellido }}</th>
+                <th> {{ object.aspi_correo }}</th>
+                <th> {{ object.aspi_genero }}</th>
+                <th> {{ object.tipodocumento_id }}</th>
+                <th> {{ object.aspi_numerodocumento }}</th>
+                <th> {{ object.aspi_rh }}</th>
+                <th> {{ object.aspi_numerocelular }}</th>
+                <th> {{ object.aspi_telefonocasa }}</th>
+                <th> {{ object.aspi_estado }}</th>
+                <th> {{ object.aspi_ciudadnacimiento }}</th>
+                <th> {{ object.aspi_ciudadexpediciondocumento }}</th>
+                <th> {{ object.aspi_ciudadresidencia }}</th>
+                <th> {{ object.aspi_direccion }}</th>
+                <td style="width: 125px">
+                    <a href="{% url 'centroidiomas:aspirante_update' object.pk %}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar detalles">
+                        {% include "buttons/button_edit.html" %}
+                    </a>
+                    <a href="{% url 'centroidiomas:aspirante_delete' object.pk %}" class="btn btn-sm btn-clean btn-icon" title="Eliminar">
+                        {% include "buttons/button_delete.html" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}

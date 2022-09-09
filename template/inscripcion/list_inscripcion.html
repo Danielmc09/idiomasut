@@ -1,0 +1,40 @@
+{% extends 'base/data_table.html' %}
+{% block btn_create %}
+    <a href="{% url 'centroidiomas:inscripcion_create' %}" class="btn btn-primary font-weight-bolder">
+        {% include "buttons/button_create.html" %}
+        Nuevo registro
+    </a>
+{% endblock btn_create %}
+{% block title_table %}
+    <tr>
+        <th> ID</th>
+        <th> Estado inscripción</th>
+        <th> Aspirante</th>
+        <th> Fecha inscripción</th>
+        <th> Grupos</th>
+        <th> Idiomas</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.insc_id }}</th>
+                <th> {{ object.insc_estadoinscripcion }}</th>
+                <th> {{ object.aspirante }}</th>
+                <th> {{ object.insc_fechainscripcion }}</th>
+                <th> {{ object.grupos }}</th>
+                <th> {{ object.idioma }}</th>
+                <td style="width: 125px">
+                    <a href="{% url 'centroidiomas:inscripcion_update' object.pk %}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar detalles">
+                        {% include "buttons/button_edit.html" %}
+                    </a>
+                    <a href="{% url 'centroidiomas:inscripcion_delete' object.pk %}" class="btn btn-sm btn-clean btn-icon" title="Eliminar">
+                        {% include "buttons/button_delete.html" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}

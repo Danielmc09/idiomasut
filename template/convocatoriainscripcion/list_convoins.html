@@ -1,0 +1,44 @@
+{% extends 'base/data_table.html' %}
+{% block btn_create %}
+    <a href="{% url 'centroidiomas:convocatoriainscripcion_create' %}" class="btn btn-primary font-weight-bolder">
+        {% include "buttons/button_create.html" %}
+        Nuevo registro
+    </a>
+{% endblock btn_create %}
+{% block title_table %}
+    <tr>
+        <th> ID</th>
+        <th> Inscripción</th>
+        <th> Idioma</th>
+        <th> Fecha inicio</th>
+        <th> Fecha fin</th>
+        <th> Nombre convocatoria</th>
+        <th> # Cupos</th>
+        <th> Periodo academico</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.coin_id }}</th>
+                <th> {{ object.inscripcion }}</th>
+                <th> {{ object.idioma }}</th>
+                <th> {{ object.coin_fechainicio }}</th>
+                <th> {{ object.coin_fechafin }}</th>
+                <th> {{ object.coin_nombre }}</th>
+                <th> {{ object.coin_numerocupos }}</th>
+                <th> {{ object.periodoacademico }}</th>
+                <td style="width: 125px">
+                    <a href="{% url 'centroidiomas:convocatoriainscripcion_update' object.pk %}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar detalles">
+                        {% include "buttons/button_edit.html" %}
+                    </a>
+                    <a href="{% url 'centroidiomas:convocatoriainscripcion_delete' object.pk %}" class="btn btn-sm btn-clean btn-icon" title="Eliminar">
+                        {% include "buttons/button_delete.html" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}

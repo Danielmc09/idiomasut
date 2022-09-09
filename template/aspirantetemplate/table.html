@@ -1,0 +1,42 @@
+{% extends 'aspirantetemplate/index_aspirante.html' %}
+
+{% block location %}
+    {{ location }}
+{% endblock location %}
+
+{% block content %}
+<!--begin::Card-->
+<div class="card card-custom">
+    <div class="card-header flex-wrap py-5">
+        <div class="card-title">
+            <h3 class="card-label">{{ location }}
+                <span class="d-block text-muted pt-2 font-size-sm">{{ message_help }}</span>
+            </h3>
+        </div>
+        <div class="card-toolbar">
+            <!--begin::Button-->
+            {% block btn_create %}
+
+            {% endblock btn_create %}
+            <!--end::Button-->
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+            <thead>
+            {% block title_table %}
+
+            {% endblock title_table %}
+            </thead>
+            <tbody>
+            {% block body_table %}
+
+            {% endblock body_table %}
+            </tbody>
+        </table>
+        <!--end: Datatable-->
+    </div>
+</div>
+<!--end::Card-->
+{% endblock content %}

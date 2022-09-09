@@ -1,0 +1,38 @@
+{% extends 'base/data_table.html' %}
+{% block btn_create %}
+    <a href="{% url 'centroidiomas:idioma_create' %}" class="btn btn-primary font-weight-bolder">
+        {% include "buttons/button_create.html" %}
+        Nuevo registro
+    </a>
+{% endblock btn_create %}
+{% block title_table %}
+    <tr>
+        <th> ID</th>
+        <th> Nombre</th>
+        <th> Descripción</th>
+        <th> Estado</th>
+        <th> Niveles</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.idio_id }}</th>
+                <th> {{ object.idio_nombre }}</th>
+                <th> {{ object.idio_descripcion }}</th>
+                <th> {{ object.idio_estado }}</th>
+                <th> {{ object.niveles }}</th>
+                <td style="width: 125px">
+                    <a href="{% url 'centroidiomas:idioma_update' object.pk %}" class="btn btn-sm btn-clean btn-icon mr-2" title="Editar detalles">
+                        {% include "buttons/button_edit.html" %}
+                    </a>
+                    <a href="{% url 'centroidiomas:idioma_delete' object.pk %}" class="btn btn-sm btn-clean btn-icon" title="Eliminar">
+                        {% include "buttons/button_delete.html" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}

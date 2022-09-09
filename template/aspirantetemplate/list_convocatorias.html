@@ -1,0 +1,36 @@
+{% extends 'aspirantetemplate/table.html' %}
+
+{% block title_table %}
+    <tr>
+        <th> Idioma </th>
+        <th> Fecha inicio</th>
+        <th> Fecha fin</th>
+        <th> Nombre convocatoria</th>
+        <th> # Cupos</th>
+        <th> Periodo academico</th>
+        <th> Acciones</th>
+    </tr>
+{% endblock title_table %}
+{% block body_table %}NIVELES
+    {% if object_list %}
+        {% for object in object_list %}
+            <tr>
+                <th> {{ object.idioma }}</th>
+                <th> {{ object.coin_fechainicio }}</th>
+                <th> {{ object.coin_fechafin }}</th>
+                <th> {{ object.coin_nombre }}</th>
+                <th> {{ object.coin_numerocupos }}</th>
+                <th> {{ object.periodoacademico }}</th>
+                <td style="width: 125px">
+                    <form class="form" method="POST" action="{% url 'centroidiomas:inscripcionaspirante_view' %}">
+                        {% csrf_token %}
+                        <input type="hidden" style="display: none" name="idioma" value="{{ object.idioma.idio_id }}" id="insc_estadoinscripcion" required="">
+                        <button class="btn btn-sm btn-clean btn-icon mr-2" title="Inscribir a convocatoria">
+                            {% include "buttons/button_edit.html" %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock body_table %}
